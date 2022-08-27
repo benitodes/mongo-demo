@@ -16,7 +16,15 @@ mongoose.connect('mongodb://localhost/playground', { useNewUrlParser: true, useU
       enum: ['web', 'mobile', 'network'],
     },
     author: String,
-    tags: [ String ],
+    tags: {
+      type: Array,
+      validate: {
+        validator: function(value) {
+          return value && value.length > 0;
+        },
+        message: 'A course should have at least one tag.'
+      }
+    },
     date: { type: Date, default: Date.now },
     isPublished : Boolean,
     price: {
@@ -34,7 +42,7 @@ async function createCourse() {
         name: 'Angular Course',
         category: 'web',
         author: 'Benoit',
-        tags: ["angular", 'frontend'],
+        tags: ['frontend'],
         isPublished: true,
         price: 15
     });
@@ -49,7 +57,7 @@ async function createCourse() {
 
 createCourse();
 
-async function getCourses() {
+//async function getCourses() {
 //     // eq (equal)
 //     // ne (not equal)
 //     // gt (greater than)
@@ -65,8 +73,8 @@ async function getCourses() {
 //     const pageNumber = 2;
 //     const pageSize = 10;
 
-  const courses = await Course
-    .find({ author: 'Mosh', isPublished: true})
+// const courses = await Course
+//   .find({ author: 'Mosh', isPublished: true})
 //         //.find({ price: { $gte: 10, $lte: 20 } })
 //         //.find()
 //         //.or([ { author: "Benoit"}, { isPublished: true}])
@@ -83,10 +91,9 @@ async function getCourses() {
 //         .sort({ name: 1})
 //         //.select({ name: 1, tags: 1 });
 //         .count();
-  console.log(courses);
-}
-
-getCourses();
+//   console.log(courses);
+// }
+// getCourses();
 
 
 // async function updateCourse(id) {
@@ -99,6 +106,8 @@ getCourses();
 //    const result = await course.save();
 //    console.log(result);
 // }
+
+// updateCourse('62bb1789242f112231423f7b');
 
 // async function updateCourse(id) {
 //     const course = await Course.findByIdAndUpdate(id, {

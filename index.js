@@ -32,7 +32,7 @@ const Course = mongoose.model('Course', courseSchema);
 async function createCourse() {
     const course = new Course({
         name: 'Angular Course',
-        category: '-',
+        category: 'web',
         author: 'Benoit',
         tags: ["angular", 'frontend'],
         isPublished: true,
@@ -49,7 +49,7 @@ async function createCourse() {
 
 createCourse();
 
-// async function getCourses() {
+async function getCourses() {
 //     // eq (equal)
 //     // ne (not equal)
 //     // gt (greater than)
@@ -62,11 +62,11 @@ createCourse();
 //     // or
 //     // and
 
-//     const pageNumber =2;
+//     const pageNumber = 2;
 //     const pageSize = 10;
 
-//     const courses = await Course
-//         .find({ author: 'Benoit', isPublished: true})
+  const courses = await Course
+    .find({ author: 'Mosh', isPublished: true})
 //         //.find({ price: { $gte: 10, $lte: 20 } })
 //         //.find()
 //         //.or([ { author: "Benoit"}, { isPublished: true}])
@@ -83,9 +83,11 @@ createCourse();
 //         .sort({ name: 1})
 //         //.select({ name: 1, tags: 1 });
 //         .count();
+  console.log(courses);
+}
 
-//     console.log(courses);
-// }
+getCourses();
+
 
 // async function updateCourse(id) {
 //     const course = await Course.findById(id);

@@ -16,28 +16,6 @@ const Course = mongoose.model('Course', courseSchema);
 
 async function getCourses() {
     return await Course
-        .find({ tags: 'backend', isPublished: true })
-        .sort({ name: 1 })
-        .select({ name: 1, author: 1 })
-}
-
-// async function getCourses() {
-//     return await Course
-//         .find({ tags: 'backend', isPublished: true })
-//         .sort({ name: 1 })
-//         .select({ name: 1, author: 1 })
-// }
-
-// async function getCourses() {
-//     return await Course
-//         .find({ isPublished: true })
-//         .or([ { tags: 'frontend', tags: 'backend'} ] )
-//         .sort({ price: -1 })
-//         .select({ name: 1, author: 1, price: 1 })
-// }
-
-async function getCourses() {
-    return await Course
         .find()
         .or([
             { price: {$gte: 15 }},
@@ -53,4 +31,3 @@ async function run () {
 }
 
 run();
-
